@@ -5,7 +5,7 @@
 #ifdef __APPLE__
 
 #include <ApplicationServices/ApplicationServices.h>
-
+extern "C" void showAlert(const char*);
 #endif
 
 std::string sequenceBuffer;
@@ -37,6 +37,10 @@ void checkKeySequence(char key) {
     if (sequenceBuffer == "afka") {
         resetSequence();
         inputBlocked = !inputBlocked;
+
+        if(inputBlocked) {
+            showAlert("Everything is locked!");
+        }
     }
 
     lastKeyPressTime = now;
